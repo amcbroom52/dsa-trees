@@ -6,7 +6,13 @@ import { BNodeNum } from "../common/bintree";
  **/
 
 function minDepth(node: BNodeNum): number {
-  return 42;
+  const rightMin = node.rnode ? minDepth(node.rnode) : 0;
+  const leftMin = node.lnode ? minDepth(node.lnode) : 0;
+
+  const mins = [rightMin, leftMin].filter(el => el !== 0);
+
+  if (mins.length === 0) return 1;
+  return 1 + Math.min(...mins);
 }
 
 export { minDepth };

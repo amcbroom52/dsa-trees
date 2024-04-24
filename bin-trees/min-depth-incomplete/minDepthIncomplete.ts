@@ -6,7 +6,12 @@ import { BNodeNum } from "../common/bintree";
  */
 
 function minDepthToIncomplete(node: BNodeNum): number {
-  return 42;
+  if (!node.rnode || !node.lnode) return 1;
+
+  const rightMin = minDepthToIncomplete(node.rnode);
+  const leftMin = minDepthToIncomplete(node.lnode);
+
+  return 1 + Math.min(rightMin, leftMin);
 }
 
 export { minDepthToIncomplete };

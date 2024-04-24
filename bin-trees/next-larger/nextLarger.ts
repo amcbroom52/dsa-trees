@@ -6,7 +6,17 @@ import { BNodeNum } from "../common/bintree";
  **/
 
 function nextLarger(node: BNodeNum, lowerBound: number): number | null {
-  return null;
+  const rNextLarger = node.rnode ? nextLarger(node.rnode, lowerBound) : null;
+  const lNextLarger = node.lnode ? nextLarger(node.lnode, lowerBound) : null;
+  const selfNextLarger = node.val > lowerBound ? node.val : null;
+
+  const nextLargers = [rNextLarger, lNextLarger, selfNextLarger].filter(
+    el => el !== null) as number[];
+
+  console.log(nextLargers);
+
+  if (nextLargers.length === 0) return null;
+  return Math.min(...nextLargers);
 }
 
 export { nextLarger };
